@@ -83,5 +83,28 @@ namespace Server
                 default: if (Command.Contains("/disconnect")) DisconnectServer(Command); break;
             }
         }
+        static string SetCommandClient(string Command)
+        {
+            if (Command == "/token")
+                if (AllClients.Count < MaxClient)
+                {
+                    var newClient = new Client();
+                    AllClients.Add(newClient);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"New client connection: {newClient.Token}");
+                    return newClient.Token;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("There isn't enough space on the license server");
+                    return "/limit";
+                }
+            else
+            {
+                var Client = AllClients.Find(x => x.Token == Command);
+                return Client != null ? "/connect" : "/disconnect";
+            }
+        }
     }
 }
