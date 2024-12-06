@@ -5,7 +5,7 @@ namespace Server
 {
     public class Context
     {
-        private readonly string ConnectionString = "Server=localhost;database=pr5;uid=root;";
+        private readonly string ConnectionString = "Server=localhost;database=pr5;uid=root;port=3306";
         public bool AuthenticateUser(string username, string password, out bool isBlackListed)
         {
             try
