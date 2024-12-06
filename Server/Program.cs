@@ -71,5 +71,17 @@ namespace Server
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("To change, write the command: /config");
         }
+        static void SetCommand()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            string Command = Console.ReadLine();
+            switch (Command)
+            {
+                case "/config": File.Delete(Directory.GetCurrentDirectory() + "/.config"); OnSettings(); break;
+                case "/status": GetStatus(); break;
+                case "/help": Help(); break;
+                default: if (Command.Contains("/disconnect")) DisconnectServer(Command); break;
+            }
+        }
     }
 }
